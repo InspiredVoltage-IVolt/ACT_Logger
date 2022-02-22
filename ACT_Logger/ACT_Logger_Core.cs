@@ -61,22 +61,22 @@ namespace ACT._
         {
             if (!ACT_Logger_ManagementEngine.CheckStatus()) { throw new Exception("Error: Configuration File Not Loaded. System Not Ready (1883237528)"); }
 
-            if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.FileSystem)
+            if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.FileSystem)
             {
                 _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger();
                 _CurrentLogger.LogError(className, summary, ex, additionInformation, errorType);
             }
-            else if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
+            else if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
             {
                 _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger();
                 _CurrentLogger.LogError(className, summary, ex, additionInformation, errorType);
             }
-            else if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
+            else if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
             {
                 _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger();
                 _CurrentLogger.LogError(className, summary, ex, additionInformation, errorType);
             }
-            else if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
+            else if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
             {
                 _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger();
                 _CurrentLogger.LogError(className, summary, ex, additionInformation, errorType);
@@ -94,22 +94,22 @@ namespace ACT._
 
             if (!ACT_Logger_ManagementEngine.CheckStatus()) { throw new Exception("Error: Configuration File Not Loaded. System Not Ready (1883237528)"); }
 
-            if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.FileSystem)
+            if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.FileSystem)
             {
                 if (_CurrentLogger == null) { _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger(); }
                 return _CurrentLogger.OverRidePlugin(pluginData);
             }
-            else if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
+            else if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
             {
                 if (_CurrentLogger == null) { _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger(); }
                 return _CurrentLogger.OverRidePlugin(pluginData);
             }
-            else if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
+            else if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
             {
                 if (_CurrentLogger == null) { _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger(); }
                 return _CurrentLogger.OverRidePlugin(pluginData);
             }
-            else if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
+            else if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
             {
                 if (_CurrentLogger == null) { _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger(); }
                 return _CurrentLogger.OverRidePlugin(pluginData);
@@ -125,22 +125,22 @@ namespace ACT._
         {
             if (!ACT_Logger_ManagementEngine.CheckStatus()) { throw new Exception("Error: Configuration File Not Loaded. System Not Ready (1883237528)"); }
 
-            if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.FileSystem)
+            if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.FileSystem)
             {
                 _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger();
                 _CurrentLogger.QuickLog(Information);
             }
-            else if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
+            else if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
             {
                 _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger();
                 _CurrentLogger.QuickLog(Information);
             }
-            else if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
+            else if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
             {
                 _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger();
                 _CurrentLogger.QuickLog(Information);
             }
-            else if (ACT_Logger_ManagementEngine.LoadedConfigurationType == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
+            else if (ACT_Logger_ManagementEngine.Active_Configuration_Type == ACT_Logger_ManagementEngine.SystemTypes.WindowsEventLog)
             {
                 _CurrentLogger = new ACT.Core.Logger.BuildInLoggers.ACT_FileSystem_Logger();
                 _CurrentLogger.QuickLog(Information);

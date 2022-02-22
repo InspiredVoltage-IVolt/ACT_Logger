@@ -1,5 +1,6 @@
 ﻿{
   "base-method": "FileSystem",
+  "plugin-override-base64-json": "",
   "filesystem-config": {
     "filesystem-root": "###BASEDIRECTORY###",
     "log-filename-convention": "###MONTH###-###DAY###-###YEAR###-###GUID.SUBSTRING(5,5)###.txt",
