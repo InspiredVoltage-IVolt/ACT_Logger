@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>ACT.Core.Logger</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ACT_Interfaces" Version="2.1.1" />
+    <PackageReference Include="IVolt_ACT_ExtensionLibrary" Version="2.0.9" />
+  </ItemGroup>
+
+</Project>

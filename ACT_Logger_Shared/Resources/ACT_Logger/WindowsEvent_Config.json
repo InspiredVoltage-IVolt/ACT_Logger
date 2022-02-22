@@ -1,0 +1,16 @@
+﻿{
+  "base-method": "WindowsEventLog",
+  "base-config": {
+    "event-source-name": "",
+    "event-log-name": "",
+    "append-source-to-alllogs": true,
+    "encrypt-log": true,
+    "encryption-method": "Microsoft-ProtectedData-Machine",
+    "custom-data": [
+      {
+        "name": "",
+        "value": ""
+      }
+    ]
+  }
+}

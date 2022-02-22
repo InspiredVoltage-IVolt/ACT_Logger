@@ -1,0 +1,18 @@
+﻿{
+  "base-method": "ADONetDatabase",
+  "base-config": {
+    "database-connection-string": "",
+    "plugin-dll-name": "",
+    "insert-query": "",
+    "update-query": "",
+    "delete-query": "",
+    "encrypt-log": true,
+    "encryption-method": "Microsoft-ProtectedData-Machine",
+    "custom-data": [
+      {
+        "name": "",
+        "value": ""
+      }
+    ]
+  }
+}

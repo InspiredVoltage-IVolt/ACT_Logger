@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6b3c2d71-2902-4c9d-8e97-542a01e42ae6</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>ACT_Logger_Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Documentation\Workflow_Image.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\FileSystem_Config.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\WebService_Config.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\ADONet_Config.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\WindowsEvent_Config.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\config.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Documentation\ACT Logger.xmind" />
+  </ItemGroup>
+</Project>

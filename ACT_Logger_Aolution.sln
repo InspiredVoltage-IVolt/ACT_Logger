@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32210.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT_Logger", "ACT_Logger\ACT_Logger.csproj", "{94673855-97B7-45E0-AAB4-BC6146844B51}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ACT_Logger_Shared", "ACT_Logger_Shared\ACT_Logger_Shared.shproj", "{6B3C2D71-2902-4C9D-8E97-542A01E42AE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT_Logger_TestConsole", "ACT_Logger_TestConsole\ACT_Logger_TestConsole.csproj", "{5FEA4993-844D-4549-A79D-2DFD9FAB4647}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ACT_Logger_Shared\ACT_Logger_Shared.projitems*{6b3c2d71-2902-4c9d-8e97-542a01e42ae6}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9570670-EC19-4AB1-9EB4-9F89686BB04A}
+	EndGlobalSection
+EndGlobal

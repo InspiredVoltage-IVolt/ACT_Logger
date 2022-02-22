@@ -1,0 +1,16 @@
+﻿{
+  "base-method": "WebService",
+  "base-config": {
+    "service-endpoint": "",
+    "get-url-information": "",
+    "response-type": "",
+    "encrypt-log": true,
+    "encryption-method": "Microsoft-ProtectedData-Machine",
+    "custom-data": [
+      {
+        "name": "",
+        "value": ""
+      }
+    ]
+  }
+}
