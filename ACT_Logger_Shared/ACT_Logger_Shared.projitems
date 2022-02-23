@@ -15,6 +15,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\ADONet_Config.json" />
     <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\WindowsEvent_Config.json" />
     <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\config.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Plugins\ACT_Example_Package\plugin_package_info.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Type_JSON_Examples\I_Author_JSON_Type_Example.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Documentation\ACT Logger.xmind" />

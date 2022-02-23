@@ -9,6 +9,7 @@ using System.Globalization;
 namespace ACT.Core.Logger.Types
 {
 
+
     public class Plugin_Assembly_Information
     {
         [JsonProperty("author_name")]
@@ -65,4 +66,21 @@ namespace ACT.Core.Logger.Types
         public string ToBase64Json() => JsonConvert.SerializeObject(this, JSONConverter.Settings).ToBase64();
         public string ToJson() => JsonConvert.SerializeObject(this, JSONConverter.Settings);
     }
+
+#if DEBUG
+    internal class PluginHashInstructionsInfo
+    {
+        public override string ToString()
+        {
+            return new Y().ToString();
+        }
+        private class Y
+        {
+            public override string ToString()
+            {
+                return "20d24b3e-5e8b-4f46-afe6-77e579083e3e__ACT__205412c1-e046-4b2d-af16-186a73f8cb9a  This is the EXAMPLE Source for ACT Example Plugins HASH (SHA3512)->Base64 The Second Guid Is DB UserID/CompanyID";
+            }
+        }
+    }
+#endif
 }

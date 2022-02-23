@@ -1,0 +1,29 @@
+﻿{
+  "i-author-info": "ewogICJuYW1lIjogIk1hcmsgQWxpY3oiLAogICJlbWFpbCI6ICJtYXJrQGl2b2x0LmlvIiwKICAiZGF0ZWxhc3RlZGl0ZWQiOiAiMi8yMi8yMDIyIiwKICAiZGVzY3JpcHRpb24iOiAiRXhhbXBsZSBfQXV0aG9yIEpTT04gQ2xhc3MiLAogICJhZGRpdGlvbmFsaW5mb3JtYXRpb24iOiBbCiAgICB7CiAgICAgICJrZXkiOiAiQUNUIiwKICAgICAgInZhbHVlIjogIkJ5IElWb2x0LCBsbGMiCiAgICB9CiAgXSwKICAiYWN0aWRoYXNoIjogIllUWTVaamN6WTJOaE1qTmhPV0ZqTldNNFlqVTJOMlJqTVRnMVlUYzFObVU1TjJNNU9ESXhOalJtWlRJMU9EVTVaVEJrTVdSall6RTBOelZqT0RCaE5qRTFZakl4TWpOaFpqRm1OV1k1TkdNeE1XVXpaVGswTURKak0yRmpOVFU0WmpVd01ERTVPV1E1TldJMlpETmxNekF4TnpVNE5UZzJNamd4WkdOa01qWT0iCn0=",
+  "package-id": "20d24b3e-5e8b-4f46-afe6-77e579083e3e",
+  "package-name": "Example ACT Plugin Package",
+  "certification-hash": "YTY5ZjczY2NhMjNhOWFjNWM4YjU2N2RjMTg1YTc1NmU5N2M5ODIxNjRmZTI1ODU5ZTBkMWRjYzE0NzVjODBhNjE1YjIxMjNhZjFmNWY5NGMxMWUzZTk0MDJjM2FjNTU4ZjUwMDE5OWQ5NWI2ZDNlMzAxNzU4NTg2MjgxZGNkMjY=",
+  "filesystem-config": {
+    "filesystem-root": "###BASEDIRECTORY###",
+    "dll-filename": "",
+    "append-systemconfiguration-values": true,
+    "systemconfiguration-values-filename": "pp_systemconfiguration.json",
+    "encrypt-systemconfiguration-values-file": true,
+    "encryption-method": "Microsoft-ProtectedData-Machine",
+    "additional-data": [
+      {
+        "name": "",
+        "value": ""
+      }
+    ]
+  },
+  "types": [
+    {
+      "interface-fullname": "",
+      "interface-shortname": "",
+      "full-class-name": "",
+      "dll_file_name": "",
+      "i-author-info": "ewogICJuYW1lIjogIk1hcmsgQWxpY3oiLAogICJlbWFpbCI6ICJtYXJrQGl2b2x0LmlvIiwKICAiZGF0ZWxhc3RlZGl0ZWQiOiAiMi8yMi8yMDIyIiwKICAiZGVzY3JpcHRpb24iOiAiRXhhbXBsZSBfQXV0aG9yIEpTT04gQ2xhc3MiLAogICJhZGRpdGlvbmFsaW5mb3JtYXRpb24iOiBbCiAgICB7CiAgICAgICJrZXkiOiAiQUNUIiwKICAgICAgInZhbHVlIjogIkJ5IElWb2x0LCBsbGMiCiAgICB9CiAgXSwKICAiYWN0aWRoYXNoIjogIllUWTVaamN6WTJOaE1qTmhPV0ZqTldNNFlqVTJOMlJqTVRnMVlUYzFObVU1TjJNNU9ESXhOalJtWlRJMU9EVTVaVEJrTVdSall6RTBOelZqT0RCaE5qRTFZakl4TWpOaFpqRm1OV1k1TkdNeE1XVXpaVGswTURKak0yRmpOVFU0WmpVd01ERTVPV1E1TldJMlpETmxNekF4TnpVNE5UZzJNamd4WkdOa01qWT0iCn0="
+    }
+  ]
+}
