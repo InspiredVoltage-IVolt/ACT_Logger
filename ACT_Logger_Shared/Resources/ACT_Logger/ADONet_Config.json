@@ -8,6 +8,8 @@
     "delete-query": "",
     "encrypt-log": true,
     "encryption-method": "Microsoft-ProtectedData-Machine",
+    "plugin-package": "ACT_Example_Package\\plugin_package_info.json",
+    "plugin-full-classname": "",
     "custom-data": [
       {
         "name": "",

@@ -5,10 +5,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <RootNamespace>ACT.Core.Logger</RootNamespace>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <AssemblyVersion>1.2.1</AssemblyVersion>
+    <FileVersion>1.2.1</FileVersion>
+    <PackageTags>ACT; Simple Logger, Error Logging, Note Logging, KISS Design, Expandable, Plugin Capable, ACT Family Integrated</PackageTags>
+    <Version>1.2.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ACT_Interfaces" Version="2.1.1" />
+    <PackageReference Include="ACT_Interfaces" Version="2.1.2" />
     <PackageReference Include="IVolt_ACT_ExtensionLibrary" Version="2.0.9" />
   </ItemGroup>
 

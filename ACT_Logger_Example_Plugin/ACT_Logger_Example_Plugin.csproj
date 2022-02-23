@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <Authors>Mark Alicz</Authors>
+    <Company>IVolt, LLC</Company>
+    <Product>ACT_Logger_Example_Plugin</Product>
+    <Description>Example ACT_Logger Plugin</Description>
+    <Copyright>2022 IVolt</Copyright>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1</FileVersion>
+    <PackageTags>ACT; Simple Logger Plugin, Error Logging, Example ACT Logger Plugin, KISS Design, Expandable, Plugin, ACT Family Integrated</PackageTags>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ACT_Interfaces" Version="2.1.2" />
+  </ItemGroup>
+
+</Project>

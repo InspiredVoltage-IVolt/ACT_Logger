@@ -1,6 +1,7 @@
 ﻿using ACT.Core.Extensions;
 using ACT.Core.Interfaces.Common;
 using ACT.Core.Logger.Types;
+using ACT.Core.Types.PluginPackage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -152,10 +153,10 @@ namespace ACT.Core.Logger
             return true;
         }
 
-        internal static bool LoadOverRide_Plugin(Plugin_Assembly_Information pluginData)
+        internal static bool LoadOverRide_Plugin(ACT_Plugin_Package_Definition pluginData)
         {
             if (pluginData == null) { throw new Exception("Plugin Data Is Null (-943516310)"); }
-            if (pluginData.SystemTypeIdentifier.NullOrEmpty()) { return false; }
+            if (pluginData.Included_Plugin_Type_Implementations.First()..NullOrEmpty()) { return false; }
 
             // SAVE CURRENT STATE
             SystemTypes? _OriginalType = Active_Configuration_Type;

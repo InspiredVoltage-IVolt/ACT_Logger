@@ -37,6 +37,12 @@ namespace ACT.Core.Logger.Configuration
 
         [JsonProperty("custom-data", NullValueHandling = NullValueHandling.Ignore)]
         public List<CustomNameValueData> CustomData { get; set; }
+
+        [JsonProperty("plugin-package", NullValueHandling = NullValueHandling.Ignore)]
+        public string Plugin_Package { get; set; }
+
+        [JsonProperty("plugin-full-classname", NullValueHandling = NullValueHandling.Ignore)]
+        public string Plugin_Full_ClassName { get; set; }
     }
 
 }
