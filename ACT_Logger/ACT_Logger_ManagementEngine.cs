@@ -1,6 +1,7 @@
 ﻿using ACT.Core.Extensions;
 using ACT.Core.Interfaces.Common;
 using ACT.Core.Types.PluginPackage;
+using System.Linq;
 
 namespace ACT.Core.Logger
 {
@@ -68,34 +69,84 @@ namespace ACT.Core.Logger
         #region Important Variables
 
         /// <summary>
-        /// Holds the Current Loaded Configuration RAW JSON Data
+        /// Holds the Current Loaded Configuration RAW JSON Data (Either Default Config or Plugin Config)
         /// </summary>
         private static string _RawJSON = null;
 
         /// <summary>
-        /// Active Base Path - Only Altered By a Plugin Override
+        /// Active Base Path = Resources\\ACT_Logger\\
         /// </summary>
-        internal static string ActiveBasePath = System_BaseDirectory;
+        internal static string ActiveBasePath = System_BaseACT_LoggerDirectory;
 
+        /// <summary>
+        /// Defines if the Plugin isdefined and being used
+        /// </summary>
+        public static bool UsingPlugin { get; internal set; }
+
+        #region Plugin Variables
         /// <summary>
         /// Holds The Plugin Class Once Loaded
         /// </summary>
         internal static I_ErrorLoggable Plugin = null;
 
         /// <summary>
+        /// Holds the Plugin Package Assembly
+        /// </summary>
+        internal static System.Reflection.Assembly _PluginAssembly = null;
+
+        /// <summary>
         /// Plugin Package Definition Variable
         /// </summary>
-        internal static ACT_Plugin_Package_Definition PluginPackage = null;
+        internal static ACT_Plugin_Package_Definition Plugin_Package_Data = null;
+
+        /// <summary>
+        /// Plugin Configuration Path
+        /// </summary>
+        internal static string Plugin_Configuration_Path = null;
+
+        /// <summary>
+        /// Plugin Full Configuration File Path
+        /// </summary>
+        internal static string Plugin_Full_Configuration_File_Path = null;
 
         /// <summary>
         /// Plugin Active DLL Full Path
         /// </summary>
-        internal static string Plugin_FullDLLPath = null;
+        internal static string Plugin_Full_Dll_Path = null;
 
         /// <summary>
         /// Plugin Full ClassName
         /// </summary>
-        internal static string Plugin_FullClassName = null;
+        internal static string Plugin_Full_Class_Name = null;
+
+        #endregion
+
+        /// <summary>
+        /// Simple Is Ready Checks For Active_Configuration_Type
+        /// </summary>        
+        internal static bool IsReady { get { return ACT_Logger_ManagementEngine.Active_Configuration_Type != null ? true : false; } }
+
+        /// <summary>
+        /// Checks the Statis To Ensure everying Loaded Correctly
+        /// </summary>
+        /// <returns></returns>
+        internal static bool CheckStatus()
+        {
+            if (!IsReady)
+            {
+                ACT_Logger_ManagementEngine.LoadConfigurationFile();
+                if (!IsReady) { return false; }
+            }
+            else
+            {
+                if (UsingPlugin)
+                {
+                    if (Plugin == null) { return false; }
+                    if (Plugin is I_ErrorLoggable) { return true; }
+                }
+            }
+            return true;
+        }
 
         #endregion
 
@@ -129,14 +180,10 @@ namespace ACT.Core.Logger
         public static string UsedConfigurationFile = null;
         public static string RawJSON { get { return _RawJSON; } internal set { _RawJSON = value; } }
 
-        internal static bool IsReady { get { return ACT_Logger_ManagementEngine.Active_Configuration_Type != null ? true : false; } }
-        internal static bool CheckStatus()
-        {
-            if (!IsReady) { ACT_Logger_ManagementEngine.LoadConfigurationFile(); }
-            if (!IsReady) { return false; }
-
-            return true;
-        }
+        /// <summary>
+        /// Returns the current Plugin Package Assembly
+        /// </summary>
+        public static System.Reflection.Assembly PluginAssembly { get { return _PluginAssembly; } }
 
         internal static bool ValidatePaths()
         {
@@ -163,16 +210,6 @@ namespace ACT.Core.Logger
             if (_SearchData.Count() != 1) { throw new Exception("Error Locating Single Configuration File. (1554981925)"); }
 
             UsedConfigurationFile = _SearchData.First();
-
-            /*  
-            // REMOVE OLD CODE
-            while (!File.Exists(UsedConfigurationFile))
-            {
-                _tmpFileList.Remove(UsedConfigurationFile);
-                if (_tmpFileList.Count() > 0) { UsedConfigurationFile = _tmpFileList.First(); }
-                else { throw new Exception("No Valid Configuration File Found (1554981928)"); }
-            }
-            */
 
             try
             {
@@ -219,99 +256,74 @@ namespace ACT.Core.Logger
         /// <param name="pluginData"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        internal static bool Load_PluginPackage(ACT_Plugin_Package_Definition pluginData, string FullClassName)
+        internal static bool Load_PluginPackage(string PluginPackageName, string FullClassName)
         {
-            if (pluginData == null || FullClassName.NullOrEmpty()) { throw new Exception("Plugin Data Is InValid (-943516310)"); }
-            if (pluginData.Included_Plugin_Type_Implementations == null || pluginData.Included_Plugin_Type_Implementations.Count == 0 || FullClassName.NullOrEmpty()) { throw new Exception("Plugin Data Is Invalid (-943516310)"); }
+            if (PluginPackageName.NullOrEmpty() || FullClassName.NullOrEmpty()) { throw new Exception("INVALID PARAMETERS: (-100)"); }
 
-            // if (IsReady == false) { throw new Exception("System Is Not Ready. Please Check Configuration File (1554981930)"); }
+            string _CurrentRawJSON = _RawJSON;
 
-            PluginPackage = pluginData;
+            Plugin_Configuration_Path = System_BasePluginPackagesDirectory.EnsureDirectoryFormat() + PluginPackageName + "\\";
 
-            if (PluginPackage.Included_Plugin_Type_Implementations.Exists(x => x.FullClassName == FullClassName) == false)
+            if (Plugin_Configuration_Path.DirectoryExists() == false) { throw new Exception("Unable to Locate The Plugin Package Configuration Path: " + Plugin_Configuration_Path + " (-654356631)"); }
+            Plugin_Full_Configuration_File_Path = Plugin_Configuration_Path + "plugin_package_info.json";
+            if (Plugin_Full_Configuration_File_Path.FileExists() == false) { throw new Exception("Unable to Locate The Plugin Package Configuration File: " + Plugin_Full_Configuration_File_Path + " (-6543566312)"); }
+
+            _RawJSON = Plugin_Full_Configuration_File_Path.ReadAllText();
+
+            // TRY AND LOAD PLUGIN CONFIGURATION DATA
+            try { Plugin_Package_Data = ACT_Plugin_Package_Definition.FromJson(_RawJSON); } catch { throw new Exception("Plugin Data Is InValid (-943516310)"); }
+
+            // IF PLUGIN PACKAGE DATA DIDNT LOAD PROPERLY OR DLLFileName is Null Or Empty
+            if (Plugin_Package_Data == null || Plugin_Package_Data.FilesystemConfig.DllFilename.NullOrEmpty()) { throw new Exception("Plugin Data Is InValid (Missing DLL File Name) (-943516310)"); }
+
+            // IF PLUGIN PACKAGE DATA DOESNT CONTAIN DEFINED IMPLEMENTATIONS
+            if (Plugin_Package_Data.Included_Plugin_Type_Implementations == null || Plugin_Package_Data.Included_Plugin_Type_Implementations.Count == 0) { throw new Exception("Plugin Data Is Invalid (No Implementations Defined) (-943516310)"); }
+
+            // IF PLUGIN PACKAGED DOESNT DEFINE THE DLLFileName
+            if (Plugin_Package_Data.FilesystemConfig.DllFilename.ToLower().EndsWith(".dll") == false) { throw new Exception("Plugin Data Is Invalid DLLFileName:(" + Plugin_Package_Data.FilesystemConfig.DllFilename + ") (-943516310)"); }
+
+            // Set Default Plugin DLL Path
+            Plugin_Full_Dll_Path = Plugin_Configuration_Path.EnsureDirectoryFormat() + Plugin_Package_Data.FilesystemConfig.DllFilename;
+
+            // Check For Plugin DLL in Both Original Path and Configurable Path
+            if (Plugin_Full_Dll_Path.FileExists() == false)
             {
-                throw new Exception("Unidentified Configuration Type Found: " + FullClassName + "(-162256631)");
-            }
-
-            if (pluginData.FilesystemConfig.FilesystemRoot.NullOrEmpty() == false)
-            {
-                if (pluginData.FilesystemConfig.FilesystemRoot.DirectoryExists())
+                if (Plugin_Package_Data.FilesystemConfig.FilesystemRoot.NullOrEmpty() || Plugin_Package_Data.FilesystemConfig.FilesystemRoot.DirectoryExists() == false)
                 {
-                    var _PluginSearchFiles = pluginData.FilesystemConfig.FilesystemRoot.FindAllFileReferencesInPath(pluginData.FilesystemConfig.DllFilename, true);
-                    if (_PluginSearchFiles == null || _PluginSearchFiles.Count() != 1)
-                    {
-                        throw new Exception("Unable to Locate The Plugin DLL: " + pluginData.FilesystemConfig.DllFilename.TryToString("") + " (-654356631)");
-                    }
-                    Plugin_FullDLLPath = _PluginSearchFiles.First();
+                    throw new Exception("Plugin Data Is Invalid Defined File System Path:(" + Plugin_Package_Data.FilesystemConfig.FilesystemRoot + ") (-943516310)");
                 }
-                else { throw new Exception("Unable to Locate The Plugin DLL: " + pluginData.FilesystemConfig.DllFilename.TryToString("") + " (-654356631)"); }
+                else
+                {
+                    Plugin_Full_Dll_Path = Plugin_Package_Data.FilesystemConfig.FilesystemRoot.EnsureDirectoryFormat() + Plugin_Package_Data.FilesystemConfig.DllFilename;
+                    if (Plugin_Full_Dll_Path.FileExists() == false) { throw new Exception("Plugin Data Is Unable To File PluginDLL:(" + Plugin_Full_Dll_Path + ") (-943516310)"); }
+                }
             }
-            else { }
-
 
             // Load the Assembly from the Found File
-            var _tmpAssembly = System.Reflection.Assembly.LoadFrom(Plugin_FullDLLPath);
+            try { _PluginAssembly = System.Reflection.Assembly.LoadFrom(Plugin_Full_Dll_Path); }
+            catch { throw new Exception("Unable to create the Assembly: " + Plugin_Full_Dll_Path + " (-540231783)"); }
 
             // Create Instance
-            try { Plugin = (I_ErrorLoggable)_tmpAssembly.CreateInstance(Plugin_FullClassName); }
-            catch (Exception ex)
-            {
-                throw new Exception("Invalid Class Name - Plugin Not Able To Create an Instance (-540231783)", ex);
-            }
-
+            try { Plugin = (I_ErrorLoggable)_PluginAssembly.CreateInstance(Plugin_Full_Class_Name); }
+            catch (Exception ex) { throw new Exception("Invalid ClassName/DLL - Plugin Not Able To Create an Instance: " + Plugin_Full_Dll_Path + " (-540231783)", ex); }
 
             // IF Plugin Is Null Load The Plugin From The Settings Defined
-            if (Plugin == null)
-            {
-                // IF Unique Path Exists - Set the Active Base PAth tp the Defined Plugin Override Location
-                if (System.IO.Directory.Exists(ACT_Logger_ManagementEngine.FileSystemConfig.FilesystemConfig.FilesystemRoot))
-                {
-                    ActiveBasePath = ACT_Logger_ManagementEngine.FileSystemConfig.FilesystemConfig.FilesystemRoot;
-                }
+            if (Plugin == null) { throw new Exception("Invalid ClassName/DLL - Plugin Not Able To Create an Instance -- NULL: " + Plugin_Full_Dll_Path + " (-540231783)"); }
 
-                // Get All The Files That Match The Plugin Information DLLFileName
-                var _PluginFilesFound = System.IO.Directory.GetFiles(ActiveBasePath, PluginPackage.DllFileName, SearchOption.AllDirectories);
+            UsingPlugin = true;
+            return true;
+        }
 
-                // If More than one file or no Files are Found Reset the ActiveBasePAth and throw an Exception
-                if (_PluginFilesFound.Count() != 1)
-                {
-                    ActiveBasePath = ACT_Logger_ManagementEngine.System_BaseDirectory;
-                    throw new Exception("Error - Path Contains Multiple DLLs with the same name (-2106315724)");
-                }
-
-
-
-                // Loop over all Keys looking for I_ErrorLoggable
-                foreach (Type t in PluginPackage.TypesAndClassNames.Keys)
-                {
-                    if (t is I_ErrorLoggable)
-                    {
-                        Plugin_FullClassName = PluginPackage.TypesAndClassNames[t].OrderBy(x => x.Key).First().Value;
-
-                        if (Plugin_FullClassName == null)
-                        {
-                            ActiveBasePath = ACT_Logger_ManagementEngine.System_BaseDirectory;
-                            Active_Configuration_Type = _OriginalType;
-                            throw new Exception("Invalid Class Name (-540231783)");
-                        }
-
-                        try { Plugin = (I_ErrorLoggable)_tmpAssembly.CreateInstance(Plugin_FullClassName); }
-                        catch (Exception ex)
-                        {
-                            ActiveBasePath = ACT_Logger_ManagementEngine.System_BaseDirectory;
-                            Active_Configuration_Type = _OriginalType;
-                            throw new Exception("Invalid Class Name - Plugin Not Able To Create an Instance (-540231783)", ex);
-                        }
-
-                        if (Plugin != null) { return true; }
-                    }
-                }
-            }
-
-            // If it Gets Here Then it Failed and We Reset All Adjusted Settings.
-            ActiveBasePath = ACT_Logger_ManagementEngine.System_BaseDirectory;
-            Active_Configuration_Type = _OriginalType;
-            return false;
+        public static void RemovePlugin()
+        {
+            UsingPlugin = false;
+            Plugin = null;
+            _PluginAssembly = null;
+            Plugin_Package_Data = null;
+            Plugin_Configuration_Path = null;
+            Plugin_Full_Configuration_File_Path = null;
+            Plugin_Full_Dll_Path = null;
+            Plugin_Full_Class_Name = null;
         }
     }
 }
