@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ACT.Core.Logger.Configuration
 {
-    public class CustomNameValueData
+    public class CustomNameValueData : Interfaces.Common.I_CustomNameValueData
     {
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; set; }

@@ -1,7 +1,9 @@
 ﻿using ACT.Core.Extensions;
 using ACT.Core.Interfaces.Common;
+using ACT.Core.Interfaces.Common.ErrorLogging;
 using ACT.Core.Types.PluginPackage;
 using System.Linq;
+using System.Reflection;
 
 namespace ACT.Core.Logger
 {
@@ -66,24 +68,34 @@ namespace ACT.Core.Logger
 
         #endregion
 
-        #region Important Variables
+        #region Important Internal Properties and Variables
+
+        #region Directory Information Variables
+        internal static string System_BaseDirectory { get { return AppDomain.CurrentDomain.BaseDirectory; } }
+        internal static string System_BaseResourcesDirectory { get { return System_BaseDirectory.EnsureDirectoryFormat() + "Resources\\"; } }
+        internal static string System_BaseACT_LoggerDirectory { get { return System_BaseResourcesDirectory.EnsureDirectoryFormat() + "ACT_Logger\\"; } }
+        internal static string System_BasePluginPackagesDirectory { get { return System_BaseDirectory.EnsureDirectoryFormat() + "Plugins\\"; } }
+        #endregion
+
+        #region Configuration Data Variables
+        internal static I_ErrorLoggable_ADONet_Configuration ADOConfig = null;
+        internal static I_ErrorLoggable_FileSystem_Configuration FileSystemConfig = null;
+        internal static I_ErrorLoggable_WebService_Configuration WebServiceConfig = null;
+        internal static I_ErrorLoggable_WindowsEvent_Configuration WindowsEventConfig = null;
+        #endregion
 
         /// <summary>
-        /// Holds the Current Loaded Configuration RAW JSON Data (Either Default Config or Plugin Config)
+        /// Holds the Current Loaded Configuration RAW JSON Data OF the ACT_Logger\\config.json File ONLY
         /// </summary>
-        private static string _RawJSON = null;
+        internal static string _RawJSON = null;
 
         /// <summary>
         /// Active Base Path = Resources\\ACT_Logger\\
         /// </summary>
         internal static string ActiveBasePath = System_BaseACT_LoggerDirectory;
 
-        /// <summary>
-        /// Defines if the Plugin isdefined and being used
-        /// </summary>
-        public static bool UsingPlugin { get; internal set; }
-
         #region Plugin Variables
+
         /// <summary>
         /// Holds The Plugin Class Once Loaded
         /// </summary>
@@ -92,7 +104,7 @@ namespace ACT.Core.Logger
         /// <summary>
         /// Holds the Plugin Package Assembly
         /// </summary>
-        internal static System.Reflection.Assembly _PluginAssembly = null;
+        internal static Assembly _PluginAssembly = null;
 
         /// <summary>
         /// Plugin Package Definition Variable
@@ -123,8 +135,59 @@ namespace ACT.Core.Logger
 
         /// <summary>
         /// Simple Is Ready Checks For Active_Configuration_Type
+        /// //TODO Expand Functionality Move To Method
         /// </summary>        
         internal static bool IsReady { get { return ACT_Logger_ManagementEngine.Active_Configuration_Type != null ? true : false; } }
+
+        #endregion
+
+        #region PUBLIC READONLY CONSTANTS
+        public static readonly string LOGSYSTEMTYPES_FILESYSTEM = "FileSystem";
+        public static readonly string LOGSYSTEMTYPES_ADONETDATABASE = "ADONetDatabase";
+        public static readonly string LOGSYSTEMTYPES_WEBSERVICE = "WebService";
+        public static readonly string LOGSYSTEMTYPES_WINDOWSEVENTLOG = "WindowsEventLog";
+
+        public static readonly string ENCRYPTION_METHOD_WINDOWSMACHINE_PROTECTED = "Microsoft-ProtectedData-Machine";
+        public static readonly string ENCRYPTION_METHOD_WINDOWS_USER_PROTECTED = "Microsoft-ProtectedData-User";
+        public static readonly string ENCRYPTION_METHOD_ACTDEFAULT = "ACT-Security-Default";
+        public static readonly string ENCRYPTION_METHOD_CUSTOM_PLUGIN = "ACT-Custom-Plugin";
+        #endregion
+
+        #region Public Static Properties-Variables
+
+        /// <summary>
+        /// Active Configuration Type
+        /// </summary>
+        public static SystemTypes? Active_Configuration_Type = null;
+
+        /// <summary>
+        /// Active Used Configuration File
+        /// </summary>
+        public static string Active_BaseConfigurationFile_Path = null;
+
+        /// <summary>
+        /// Active RawJSON
+        /// </summary>
+        public static string RawJSON { get { return _RawJSON; } internal set { _RawJSON = value; } }
+
+        /// <summary>
+        /// Returns the current Plugin Package Assembly
+        /// </summary>
+        public static Assembly PluginAssembly { get { return _PluginAssembly; } }
+
+        /// <summary>
+        /// Returns the current Plugin Package Assembly
+        /// </summary>
+        public static I_ErrorLoggable ActivePlugin { get { return Plugin; } }
+
+        /// <summary>
+        /// Defines if the Plugin isdefined and being used
+        /// </summary>
+        public static bool UsingPlugin { get; internal set; }
+
+        #endregion
+
+        #region Internal Methods
 
         /// <summary>
         /// Checks the Statis To Ensure everying Loaded Correctly
@@ -148,43 +211,10 @@ namespace ACT.Core.Logger
             return true;
         }
 
-        #endregion
-
-        #region READONLY CONSTANTS
-        public static readonly string LOGSYSTEMTYPES_FILESYSTEM = "FileSystem";
-        public static readonly string LOGSYSTEMTYPES_ADONETDATABASE = "ADONetDatabase";
-        public static readonly string LOGSYSTEMTYPES_WEBSERVICE = "WebService";
-        public static readonly string LOGSYSTEMTYPES_WINDOWSEVENTLOG = "WindowsEventLog";
-
-        public static readonly string ENCRYPTION_METHOD_WINDOWSMACHINE_PROTECTED = "Microsoft-ProtectedData-Machine";
-        public static readonly string ENCRYPTION_METHOD_WINDOWS_USER_PROTECTED = "Microsoft-ProtectedData-User";
-        public static readonly string ENCRYPTION_METHOD_ACTDEFAULT = "ACT-Security-Default";
-        public static readonly string ENCRYPTION_METHOD_CUSTOM_PLUGIN = "ACT-Custom-Plugin";
-        #endregion
-
-        #region Directory Information Variables
-        internal static string System_BaseDirectory { get { return AppDomain.CurrentDomain.BaseDirectory; } }
-        internal static string System_BaseResourcesDirectory { get { return System_BaseDirectory.EnsureDirectoryFormat() + "Resources\\"; } }
-        internal static string System_BaseACT_LoggerDirectory { get { return System_BaseResourcesDirectory.EnsureDirectoryFormat() + "ACT_Logger\\"; } }
-        internal static string System_BasePluginPackagesDirectory { get { return System_BaseDirectory.EnsureDirectoryFormat() + "Plugins\\"; } }
-        #endregion
-
-        #region Configuration Data Variables
-        internal static Configuration.ADONet_ConfigurationData ADOConfig = null;
-        internal static Configuration.FileSystem_ConfigurationData FileSystemConfig = null;
-        internal static Configuration.WebService_ConfigurationData WebServiceConfig = null;
-        internal static Configuration.WindowsEvent_ConfigurationData WindowsEventConfig = null;
-        #endregion
-
-        public static SystemTypes? Active_Configuration_Type = null;
-        public static string UsedConfigurationFile = null;
-        public static string RawJSON { get { return _RawJSON; } internal set { _RawJSON = value; } }
-
         /// <summary>
-        /// Returns the current Plugin Package Assembly
+        /// Validate All Normal Paths are Valid
         /// </summary>
-        public static System.Reflection.Assembly PluginAssembly { get { return _PluginAssembly; } }
-
+        /// <returns></returns>
         internal static bool ValidatePaths()
         {
             if (Directory.Exists(System_BaseDirectory) == false) { return false; }
@@ -209,46 +239,67 @@ namespace ACT.Core.Logger
 
             if (_SearchData.Count() != 1) { throw new Exception("Error Locating Single Configuration File. (1554981925)"); }
 
-            UsedConfigurationFile = _SearchData.First();
+            Active_BaseConfigurationFile_Path = _SearchData.First();
 
             try
             {
                 // Read All JSON Data
-                _RawJSON = File.ReadAllText(UsedConfigurationFile);
+                _RawJSON = File.ReadAllText(Active_BaseConfigurationFile_Path);
+                if (_RawJSON.NullOrEmpty()) { throw new Exception("Error - Configuration File Is Empty or Null. (-1554981925)"); }
+
+                string _PluginPackageName = "";
+                string _PluginFullClassName = "";
+                bool _LoadPluginNeeded = false;
 
                 if (_RawJSON.Contains("FileSystem"))
                 {
                     Active_Configuration_Type = SystemTypes.FileSystem;
-                    FileSystemConfig = Configuration.FileSystem_ConfigurationData.FromJson(_RawJSON);
-                    if (FileSystemConfig.FilesystemConfig.Plugin_Package.NullOrEmpty() == false)
-                    {
+                    FileSystemConfig = Configuration.FileSystem_ConfigurationData.LoadFromJson(_RawJSON);
 
-                        "plugin-package": "ACT_Example_Package\\plugin_package_info.json",
-                    "plugin-full-classname": "",
-                            }
+                    _PluginPackageName = FileSystemConfig.FilesystemConfig.Plugin_Package;
+                    _PluginFullClassName = FileSystemConfig.FilesystemConfig.Plugin_Full_ClassName;
+                    if (!_PluginPackageName.NullOrEmpty() && !_PluginFullClassName.NullOrEmpty()) { _LoadPluginNeeded=true; }
+
                 }
                 if (_RawJSON.Contains("WebService"))
                 {
                     Active_Configuration_Type = SystemTypes.WebService;
-                    WebServiceConfig = Configuration.WebService_ConfigurationData.FromJson(_RawJSON);
+                    WebServiceConfig = Configuration.WebService_ConfigurationData.LoadFromJson(_RawJSON);
+                    _PluginPackageName = WebServiceConfig.BaseConfig.Plugin_Package;
+                    _PluginFullClassName = WebServiceConfig.BaseConfig.Plugin_Full_ClassName;
+                    if (!_PluginPackageName.NullOrEmpty() && !_PluginFullClassName.NullOrEmpty()) { _LoadPluginNeeded = true; }
                 }
                 if (_RawJSON.Contains("WindowsEventLog"))
                 {
                     Active_Configuration_Type = SystemTypes.WindowsEventLog;
-                    WindowsEventConfig = Configuration.WindowsEvent_ConfigurationData.FromJson(_RawJSON);
+                    WindowsEventConfig = Configuration.WindowsEvent_ConfigurationData.LoadFromJson(_RawJSON);
+                    _PluginPackageName = WindowsEventConfig.BaseConfig.Plugin_Package;
+                    _PluginFullClassName = WindowsEventConfig.BaseConfig.Plugin_Full_ClassName;
+                    if (!_PluginPackageName.NullOrEmpty() && !_PluginFullClassName.NullOrEmpty()) { _LoadPluginNeeded = true; }
                 }
                 if (_RawJSON.Contains("ADONetDatabase"))
                 {
                     Active_Configuration_Type = SystemTypes.ADODatabase;
-                    ADOConfig = Configuration.ADONet_ConfigurationData.FromJson(_RawJSON);
+                    ADOConfig = Configuration.ADONet_ConfigurationData.LoadFromJson(_RawJSON);
+                    _PluginPackageName = ADOConfig.BaseConfig.Plugin_Package;
+                    _PluginFullClassName = ADOConfig.BaseConfig.Plugin_Full_ClassName;
+                    if (!_PluginPackageName.NullOrEmpty() && !_PluginFullClassName.NullOrEmpty()) { _LoadPluginNeeded = true; }
                 }
+
+                if (_LoadPluginNeeded) { LoadPlugin(_PluginPackageName, _PluginFullClassName); }
             }
             catch (Exception ex)
             {
                 Active_Configuration_Type = null;
                 throw new Exception("Error Locating - Loading Configuration Data (1554981927)", ex);
-            }
+            }            
         }
+
+        #endregion
+
+
+
+        #region Public Static Methods
 
         /// <summary>
         /// Load Plugin Package
@@ -256,7 +307,7 @@ namespace ACT.Core.Logger
         /// <param name="pluginData"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        internal static bool Load_PluginPackage(string PluginPackageName, string FullClassName)
+        public static bool LoadPlugin(string PluginPackageName, string FullClassName)
         {
             if (PluginPackageName.NullOrEmpty() || FullClassName.NullOrEmpty()) { throw new Exception("INVALID PARAMETERS: (-100)"); }
 
@@ -314,6 +365,9 @@ namespace ACT.Core.Logger
             return true;
         }
 
+        /// <summary>
+        /// Remove The Associated Plugin
+        /// </summary>
         public static void RemovePlugin()
         {
             UsingPlugin = false;
@@ -325,5 +379,7 @@ namespace ACT.Core.Logger
             Plugin_Full_Dll_Path = null;
             Plugin_Full_Class_Name = null;
         }
+
+        #endregion
     }
 }

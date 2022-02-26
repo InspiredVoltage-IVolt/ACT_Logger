@@ -7,14 +7,58 @@
     <RootNamespace>ACT.Core.Logger</RootNamespace>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <AssemblyVersion>1.2.1</AssemblyVersion>
-    <FileVersion>1.2.1</FileVersion>
+    <AssemblyVersion>1.2.2</AssemblyVersion>
+    <FileVersion>1.2.2</FileVersion>
     <PackageTags>ACT; Simple Logger, Error Logging, Note Logging, KISS Design, Expandable, Plugin Capable, ACT Family Integrated</PackageTags>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
+    <BaseOutputPath>D:\IVolt_Releases\ACT-Logger</BaseOutputPath>
+    <SignAssembly>False</SignAssembly>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>ACT_Logger</PackageId>
+    <Company>IVolt</Company>
+    <Authors>Mark Alicz</Authors>
+    <Description>ACT Logger is a very simple yet expandable Error/Data Logging utility.  Defined the destination of the data using the configuration patterns and then it just works.
+You are also able to define plugins that you or others write giving you unlimited possibilities.</Description>
+    <Copyright>2022 IVolt, llc</Copyright>
+    <PackageProjectUrl>www.act-net.net</PackageProjectUrl>
+    <PackageIcon>ACT_SQUARE.png</PackageIcon>
+    <PackageReleaseNotes>Debugging Release</PackageReleaseNotes>
+    <Platforms>AnyCPU;x64;ARM64</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ACT_Interfaces" Version="2.1.2" />
+    <None Include="M:\Shared drives\Assets\IVolt_Product_Images\ACT\ACT_SQUARE.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ACT_Interfaces" Version="2.1.3" />
     <PackageReference Include="IVolt_ACT_ExtensionLibrary" Version="2.0.9" />
   </ItemGroup>
 

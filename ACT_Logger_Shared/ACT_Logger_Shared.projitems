@@ -10,13 +10,33 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Documentation\Workflow_Image.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\FileSystem_Config.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\WebService_Config.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\ADONet_Config.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\WindowsEvent_Config.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\config.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Plugins\ACT_Example_Package\plugin_package_info.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Type_JSON_Examples\I_Author_JSON_Type_Example.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\FileSystem_Config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\WebService_Config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\ADONet_Config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\WindowsEvent_Config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\ACT_Logger\config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Plugins\ACT_Example_Package\DynamixExample.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Plugins\ACT_Example_Package\-1270982800.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Plugins\ACT_Example_Package\plugin_package_info.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Type_JSON_Examples\I_Author_JSON_Type_Example.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Documentation\ACT Logger.xmind" />

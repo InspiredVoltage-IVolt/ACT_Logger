@@ -6,6 +6,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <StartupObject>ACT_Logger_TestConsole.MainClass</StartupObject>
+    <Platforms>AnyCPU;x64;ARM64</Platforms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ACT_Interfaces" Version="2.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ACT_Logger\ACT_Logger.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -13,6 +13,7 @@ namespace ACT.Core.Logger
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {
+            TypeNameHandling = TypeNameHandling.All,
             MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
             DateParseHandling = DateParseHandling.None,
             Converters =

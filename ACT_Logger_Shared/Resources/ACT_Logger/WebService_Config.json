@@ -6,7 +6,7 @@
     "response-type": "",
     "encrypt-log": true,
     "encryption-method": "Microsoft-ProtectedData-Machine",
-    "plugin-package": "ACT_Example_Package\\plugin_package_info.json",
+    "plugin-package": "",
     "plugin-full-classname": "",
     "custom-data": [
       {

@@ -12,9 +12,26 @@
     "encryption-method": "Microsoft-ProtectedData-Machine",
     "additional-data": [
       {
-        "name": "",
-        "value": ""
+        "name": "SMTP-Server",
+        "value": "send.smtp.com "
+      },
+      {
+        "name": "SMTP-Port",
+        "value": "465"
+      },
+      {
+        "name": "SMTP-USESSL",
+        "value": "true"
+      },
+      {
+        "name": "Login",
+        "value": "ACT_Logger"
+      },
+      {
+        "name": "Password",
+        "value": "IV0lt_2022"
       }
+
     ]
   },
   "types": [

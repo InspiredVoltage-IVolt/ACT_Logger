@@ -1,0 +1,14 @@
+﻿{
+  "package-id": "20d24b3e-5e8b-4f46-afe6-77e579083e3e",
+  "package-name": "ACT_Example_Package",
+  "certification-hash": "YTY5ZjczY2NhMjNhOWFjNWM4YjU2N2RjMTg1YTc1NmU5N2M5ODIxNjRmZTI1ODU5ZTBkMWRjYzE0NzVjODBhNjE1YjIxMjNhZjFmNWY5NGMxMWUzZTk0MDJjM2FjNTU4ZjUwMDE5OWQ5NWI2ZDNlMzAxNzU4NTg2MjgxZGNkMjY=",
+  "filesystem": {
+    "path": "c:\\logging\\",
+    "fileformat": "MM-YYYY.txt",
+    "maxfilesize": 100000000,
+    "daysperfile": 30
+  },
+  "verbose": "true",
+  "emailcriticalerrors": true,
+  "emailaddress": "info@ivolt.io"
+}

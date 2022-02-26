@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32210.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT_Logger", "ACT_Logger\ACT_Logger.csproj", "{94673855-97B7-45E0-AAB4-BC6146844B51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACT_Logger", "ACT_Logger\ACT_Logger.csproj", "{94673855-97B7-45E0-AAB4-BC6146844B51}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ACT_Logger_Shared", "ACT_Logger_Shared\ACT_Logger_Shared.shproj", "{6B3C2D71-2902-4C9D-8E97-542A01E42AE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT_Logger_TestConsole", "ACT_Logger_TestConsole\ACT_Logger_TestConsole.csproj", "{5FEA4993-844D-4549-A79D-2DFD9FAB4647}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACT_Logger_TestConsole", "ACT_Logger_TestConsole\ACT_Logger_TestConsole.csproj", "{5FEA4993-844D-4549-A79D-2DFD9FAB4647}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT_Logger_Example_Plugin", "ACT_Logger_Example_Plugin\ACT_Logger_Example_Plugin.csproj", "{868FA7AC-8533-43D1-BA73-71C9D572FC9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACT_Logger_Example_Plugin", "ACT_Logger_Example_Plugin\ACT_Logger_Example_Plugin.csproj", "{868FA7AC-8533-43D1-BA73-71C9D572FC9E}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -17,21 +17,49 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{94673855-97B7-45E0-AAB4-BC6146844B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{94673855-97B7-45E0-AAB4-BC6146844B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Debug|ARM64.Build.0 = Debug|ARM64
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Debug|x64.ActiveCfg = Debug|x64
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Debug|x64.Build.0 = Debug|x64
 		{94673855-97B7-45E0-AAB4-BC6146844B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94673855-97B7-45E0-AAB4-BC6146844B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Release|ARM64.ActiveCfg = Release|ARM64
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Release|ARM64.Build.0 = Release|ARM64
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Release|x64.ActiveCfg = Release|x64
+		{94673855-97B7-45E0-AAB4-BC6146844B51}.Release|x64.Build.0 = Release|x64
 		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Debug|ARM64.Build.0 = Debug|ARM64
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Debug|x64.ActiveCfg = Debug|x64
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Debug|x64.Build.0 = Debug|x64
 		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Release|ARM64.ActiveCfg = Release|ARM64
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Release|ARM64.Build.0 = Release|ARM64
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Release|x64.ActiveCfg = Release|x64
+		{5FEA4993-844D-4549-A79D-2DFD9FAB4647}.Release|x64.Build.0 = Release|x64
 		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Debug|ARM64.Build.0 = Debug|ARM64
+		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Debug|x64.ActiveCfg = Debug|x64
+		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Debug|x64.Build.0 = Debug|x64
 		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Release|ARM64.ActiveCfg = Release|ARM64
+		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Release|ARM64.Build.0 = Release|ARM64
+		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Release|x64.ActiveCfg = Release|x64
+		{868FA7AC-8533-43D1-BA73-71C9D572FC9E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
